@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>THS Project</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="home.css">
+
+    
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>THS Project</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+
+                <li <% if (page === 'dash') { %>class="active" <% } %>>
+                    <a href="/"><span><i class="small material-icons" >border_all</i> <span style="margin-left:15px">Dashboard</span></span></a>
+                </li>
+
+
+                 <li  <% if (page === 'sales') { %>class="active" <% } %>>
+                            <a href="/sales"><span><i class="small material-icons" >store</i> <span style="margin-left:15px">Sales</span> </span></a>
+                        </li>
+                        <li <% if (page === 'expense') { %>class="active" <% } %>>
+                            <a href="expense"><span><i class="small material-icons" >timeline</i> <span style="margin-left:15px">Expense</span> </span></a>
+                        </li>
+                       
+
+                <li <% if (page === 'employee') { %>class="active" <% } %>>
+                    <a href="employee"><span><i class="small material-icons" >group</i> <span style="margin-left:15px">Employees</span> </span></a>
+                </li>
+
+                
+                <li <% if (page === 'report') { %>class="active" <% } %>>
+                    <a href="report"><span><i class="small material-icons" >receipt</i> <span style="margin-left:15px">Report</span> </span></a>
+                </li>
+
+                <li <% if (page === 'return') { %>class="active" <% } %>>
+                    <a href="return"><span><i class="small material-icons" >reply</i> <span style="margin-left:15px">G/Returns</span> </span></a>
+                </li>
+
+
+                
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                      
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#"> <i class="material-icons"  data-toggle="tooltip" data-placement="bottom" title="Master Key">vpn_key</i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="material-icons" data-toggle="tooltip" data-placement="bottom" title="Admin">supervisor_account</i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="material-icons" data-toggle="tooltip" data-placement="bottom" title="Log Out">touch_app</i></a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+   <%- body%>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+        $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+    </script>
+</body>
+
+</html>

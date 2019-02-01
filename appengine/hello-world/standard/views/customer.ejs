@@ -1,0 +1,441 @@
+<div style="padding:25px">
+
+    <div class="row">
+        <div class="col">
+            <form class="form-inline">
+                <input id="search" class="form-control" type="search" placeholder="Search">
+              </form>
+              <br/>
+        </div >
+        
+        <div class="col" style="text-align:right">
+                   
+          <button type="button" class="btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" style="outline:none">
+                New Customer
+              </button>
+              <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="exampleModalLabel"> Customer information</h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form style="text-align:left" > 
+                <div class="form-group" required>
+                    <label for="name">Name*</label>
+                    <input type="text" class="form-control" id="name" placeholder="name" >
+                  </div>
+                  <div class="form-group" required>
+                    <label for="phone">Phone no*</label>
+                    <input type="phone" class="form-control" id="phone" placeholder="phone no">
+                  </div>
+
+                  <div class="form-group" >
+                    <label for="exampleFormControlInput1">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="gst">GSTIN</label>
+                    <input type="text" class="form-control" id="gst" placeholder="GSTIN">
+                  </div>
+                
+                <div class="form-group" required>
+                  <label for="exampleFormControlTextarea1">Address*</label>
+                  <textarea class="form-control" id="address" rows="1"></textarea>
+                </div>
+                <div id="error" style="color:#fff;background-color:#616161;padding:15;text-align:center"></div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-sm btn-primary" onclick="submit()" style="outline:none">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+        </div>
+      </div>
+
+    
+
+    
+<table class="table table-sm" id="mytable">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+        <th scope="col">GSTIN</th>
+        <th scope="col">Address</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+     
+     <% for (i=0; i<res.rowCount ; i++){ %>
+      <tr>
+        <th scope="row"><%=res.rows[i].cid%></th>
+        <td><%=res.rows[i].name%></td>
+        <td><%=res.rows[i].phone%></td>
+        <td><%=res.rows[i].email%></td>
+        <td><%=res.rows[i].gst%></td>
+        <td><%=res.rows[i].address%></td>
+        <td >
+            <div class="dropdown">
+          <img src="3dot.png" height="20"  class="dropdown-toggle"data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false"/>
+          <div class="dropdown-menu " aria-labelledby="dropdownMenuButton"  style="margin: 0;padding:0" >
+              <a class="dropdown-item" id="<%=res.rows[i].cid%>" href="#"  data-toggle="modal" data-target="#view" onclick="viewCustomer($(this).attr('id'))"><i class="small material-icons"  style="padding-right:29">visibility</i>   View</a>
+              <a class="dropdown-item" id="<%=res.rows[i].cid%>" href="#" data-toggle="modal" data-target="#edit" onclick="setId($(this).attr('id'))"><i class="small material-icons" style="padding-right:29">edit</i>  Edit</a>
+              <a class="dropdown-item" id="<%=res.rows[i].cid%>" href="#" onclick="deleteCustomer($(this).attr('id'))" ><i class="small material-icons" style="padding-right:29">delete</i>  Delete</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+     <%}%>
+      
+    </tbody>
+  </table>
+         <!-- Modal -->
+<div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Customer information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">Name  <i><span style="color:#616161" id="ename"> </span></i></div>
+                <div class="col-md-12">Mobile <i><span style="color:#616161" id="ephone"> </span></i> </div>
+                <div class="col-md-12 ">Email <i><span style="color:#616161" id="eemail"> </span> </i> </div>
+                <div class="col-md-12 ">GST <i><span style="color:#616161" id="egst"> </span> </i> </div>
+                <div class="col-md-12">Address <i><span style="color:#616161" id="eaddress"> </span> </i> </div>
+                <div class="col-md-12 ">Advance <i><span style="color:#616161" id="eadv"> </span> </i> </div>
+                <div class="col-md-12 ">Due <i><span style="color:#616161" id="edue"> </span> </i> </div>
+                </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title" id="exampleModalLabel"> Customer information</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form style="text-align:left" > 
+                  <div class="form-group" required>
+                      <label for="name">Name*</label>
+                      <input type="text" class="form-control" id="vname" placeholder="name" >
+                    </div>
+                    <div class="form-group" required>
+                      <label for="phone">Phone no*</label>
+                      <input type="phone" class="form-control" id="vphone" placeholder="phone no">
+                    </div>
+  
+                    <div class="form-group" >
+                      <label for="exampleFormControlInput1">Email address</label>
+                      <input type="email" class="form-control" id="vemail" placeholder="name@example.com">
+                    </div>
+  
+                    <div class="form-group">
+                      <label for="gst">GSTIN</label>
+                      <input type="text" class="form-control" id="vgst" placeholder="GSTIN">
+                    </div>
+                  
+                  <div class="form-group" required>
+                    <label for="exampleFormControlTextarea1">Address*</label>
+                    <textarea class="form-control" id="vaddress" rows="1"></textarea>
+                  </div>
+                  <div class="form-group" >
+                    <label for="exampleFormControlInput1">Advance</label>
+                    <input type="number" class="form-control" id="vadv" placeholder="0.00">
+                  </div>
+                  <div class="form-group" >
+                    <label for="exampleFormControlInput1">Due</label>
+                    <input type="number" class="form-control" id="vdue" placeholder="0.00">
+                  </div>
+                  <div id="verror" style="color:#fff;background-color:#616161;padding:15;text-align:center"></div>
+                </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-sm btn-primary" onclick="editCustomer()" style="outline:none">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <script type="text/javascript">
+
+  var id;
+
+function setId(sid)
+{
+
+  console.log(sid);
+ id=sid;
+ var data;
+ 
+ $('#vname').val("")
+         $('#vphone').val("")
+         $('#vemail').val("")
+         $('#vaddress').val("")
+         $('#vgst').val("")
+         $('#vadv').val("")
+         $('#vdue').val("")
+  $.ajax({
+            type: "POST",
+            url: "/viewCustomer",
+            dataType: "json",
+            data: {
+                o: sid
+            },
+            success: function (data) {
+              if(data)
+              {
+         $('#vname').val(data.name)
+         $('#vphone').val(data.phone)
+         $('#vemail').val(data.email)
+         $('#vaddress').val(data.address)
+         $('#vgst').val(data.gst)
+         $('#vadv').val(data.advance)
+         $('#vdue').val(data.dues)
+            }else{
+              
+         $('#vname').val("")
+         $('#vphone').val("")
+         $('#vemail').val("")
+         $('#vaddress').val("")
+         $('#vgst').val("")
+         $('#vadv').val("")
+         $('#vdue').val("")
+         
+            }},
+            error: function () {
+                   }
+        });
+}
+
+      function editCustomer()
+{
+
+
+  var obj =
+         {   id:id,
+             name: document.getElementById('vname').value,
+             phone: document.getElementById('vphone').value,
+             email: document.getElementById('vemail').value,
+             gst: document.getElementById('vgst').value,
+             address: document.getElementById('vaddress').value,
+             adv:document.getElementById('vadv').value,
+             due:document.getElementById('vdue').value          
+         };
+         console.log(obj)
+
+         if(obj.name=="")
+         {
+          $('#vname').trigger('focus')
+          $('#verror').html("Name cannot be empty").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.phone==""||obj.phone.length!=10)
+        {
+          $('#vphone').trigger('focus')
+          $('#verror').html("Not a Valid phone number").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.address=="")
+        {
+          $('#vaddress').trigger('focus')
+          $('#verror').html("Address cannot be empty").fadeIn(500).delay(5000).fadeOut(500)
+        }else{
+
+          var obj = JSON.stringify(obj);
+   $.ajax({
+            type: "POST",
+            url: "/edit",
+            dataType: "json",
+            data: {
+                o: obj
+            },
+            success: function (data) {
+         $('#vname').val("")
+         $('#vphone').val("")
+         $('#vemail').val("")
+         $('#vaddress').val("")
+         $('#vgst').val("")
+         $('#vadv').val("")
+         $('#vdue').val("")
+         $('#verror').html("Customer Updated Sucessfully").fadeIn(500).delay(5000).fadeOut(500)
+         
+         window.location.href = '/customer';    
+        },
+            error: function () {
+         $('#vname').val("")
+         $('#vphone').val("")
+         $('#vemail').val("")
+         $('#vaddress').val("")
+         $('#vgst').val("")
+         $('#vadv').val("")
+         $('#vdue').val("")
+         $('#verror').html("Something Went Wrong ,Pease try Again").fadeIn(500).delay(5000).fadeOut(500)
+            }
+        });      
+            
+        }
+
+
+
+}
+
+function viewCustomer(id)
+{
+  var data;
+  
+             $("#ename").text("");
+             $("#ephone").text("");
+             $("#eemail").text("");
+             $("#eaddress").text("");
+             $("#eadv").text("");
+             $("#edue").text("");
+             $("#egst").text("");
+               $.ajax({
+            type: "POST",
+            url: "/viewCustomer",
+            dataType: "json",
+            data: {
+                o: id
+            },
+            success: function (data) {
+              if(data)
+              {
+                $("#ename").text(data.name);
+             $("#ephone").text(data.phone);
+             $("#eemail").text(data.email);
+             $("#eaddress").text(data.address);
+             $("#eadv").text(data.advance);
+             $("#edue").text(data.due);
+             $("#egst").text(data.gst);
+            }else{
+              $("#ename").text("");
+             $("#ephone").text("");
+             $("#eemail").text("");
+             $("#eaddress").text("");
+             $("#eadv").text("");
+             $("#edue").text("");
+             $("#egst").text("");
+            }},
+            error: function () {
+                  }
+        });      
+ 
+}
+
+function deleteCustomer(id)
+{
+ $.ajax({
+            type: "POST",
+            url: "/del",
+            dataType: "json",
+            data: {
+                o: id
+            },
+            success: function (data) {
+              window.location.href = '/customer';
+                    },
+            error: function () {
+              alert("error")
+            }
+        });               
+}
+
+
+
+$(document).ready(function(){
+  $("#search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#mytable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+
+  function submit()
+  {
+    var obj =
+         {
+             name: document.getElementById('name').value,
+             phone: document.getElementById('phone').value,
+             email: document.getElementById('email').value,
+             gst: document.getElementById('gst').value,
+             address: document.getElementById('address').value,          
+         };
+         console.log(obj)
+
+         if(obj.name=="")
+         {
+          $('#name').trigger('focus')
+          $('#error').html("Name cannot be empty").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.phone==""||obj.phone.length!=10)
+        {
+          $('#phone').trigger('focus')
+          $('#error').html("Not a Valid phone number").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.address=="")
+        {
+          $('#address').trigger('focus')
+          $('#error').html("Address cannot be empty").fadeIn(500).delay(5000).fadeOut(500)
+        }else{
+
+          var obj = JSON.stringify(obj);
+   $.ajax({
+            type: "POST",
+            url: "/add",
+            dataType: "json",
+            data: {
+                o: obj
+            },
+            success: function (data) {
+              $('#name').val("")
+         $('#phone').val("")
+         $('#email').val("")
+         $('#address').val("")
+         $('#gst').val("")
+         $('#error').html("Customer added Sucessfully").fadeIn(500).delay(5000).fadeOut(500)
+         
+         window.location.href = '/customer';    
+        },
+            error: function () {
+              $('#name').val("")
+         $('#phone').val("")
+         $('#email').val("")
+         $('#address').val("")
+         $('#gst').val("")
+         $('#error').html("Something Went Wrong ,Pease try Again").fadeIn(500).delay(5000).fadeOut(500)
+            }
+        });      
+            
+        }
+
+
+
+/*       
+*/
+}
+ 
+  </script>

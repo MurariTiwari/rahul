@@ -20,7 +20,13 @@
     "e2e-test": "repo-tools test deploy"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-ejs-layouts": "^2.5.0",
+    "npm": "^6.5.0",
+    "path": "^0.12.7",
+    "pg": "^7.7.1"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0"

@@ -1,0 +1,565 @@
+
+<div style="padding-left:25px;padding-top: 10px;padding-right: 5px">
+<h3>Employee</h3>
+<br/>
+    <div class="row">
+        <div class="col">
+            <form class="form-inline">
+                <input id="search" class="form-control" type="search" placeholder="Search">
+              </form>
+              <br/>
+        </div >
+        
+
+        <div class="col"  style="text-align:right">
+                   
+          <button type="button" class="btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" style="outline:none">
+                New Employee
+              </button>
+              <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="exampleModalLabel"> Employee information</h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form style="text-align:left" > 
+                <div class="form-group" required>
+                    <label for="name">Name*</label>
+                    <input type="text" class="form-control" id="name" placeholder="name" >
+                  </div>
+                  <div class="form-group" required>
+                    <label for="name">Father's Name*</label>
+                    <input type="text" class="form-control" id="fname" placeholder="Father's Name" >
+                  </div>
+                  <div class="form-group" required>
+                    <label for="phone">Phone no*</label>
+                    <input type="phone" class="form-control" id="phone" placeholder="phone no">
+                  </div>
+                  
+                  <div class="form-group" >
+                    <label for="exampleFormControlInput1">Email address*</label>
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                  </div>
+
+                  <div class="form-group" required>
+                    <label for="name">Designation*</label>
+                    <input type="text" class="form-control" id="designation" placeholder="" >
+                  </div>
+                  <div class="form-group" required>
+                    <label for="name">Date of Joining*</label>
+                    <input type="date" class="form-control" id="date" placeholder="name" >
+                  </div>    
+                 
+                <fieldset class="form-group" id="gender">
+                  <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="male" value="Male" checked>
+                        <label class="form-check-label" for="gridRadios1">
+                          Male
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="female" value="Female">
+                        <label class="form-check-label" for="gridRadios2">
+                          Female
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="form-group" required>
+                  <label for="category">State*</label>
+                  <select class="form-control" id="state" style="outline:none">
+                          <option>Andaman & Nicobar Island</option>
+                          <option>Andhra Pradesh</option>
+                          <option>Arunachal Pradesh</option>
+                          <option>Assam</option>
+                          <option>Bihar</option>
+                          <option>Chandigarh</option>
+                          <option>Chattisgarh</option>
+                          <option>Dadra & Nagar Haveli</option>
+                          <option>Daman & Diu</option>
+                          <option>Delhi</option>
+                          <option>Goa</option>
+                          <option>Gujrat</option>
+                          <option>Haryana</option>
+                          <option>Himachal Pardesh</option>
+                          <option>Jammu & Kashmir</option>
+                          <option>Jharkhand</option>
+                          <option>Karnataka</option>
+                          <option>Kerela</option>
+                          <option>Lakshadweep Island</option>
+                          <option>Madhya Pradesh</option>
+                          <option>Maharastra</option>
+                          <option>Manipur</option>
+                          <option>Meghalya</option>
+                          <option>Mizoram</option>
+                          <option>Nagaland</option>
+                          <option>Odisha</option>
+                          <option>Pondicherry</option>
+                          <option>Punjab</option>
+                          <option>Rajasthan</option>
+                          <option>Sikkim</option>
+                          <option>Tamil Nadu</option>
+                          <option>Telangana</option>
+                          <option>Tripura</option>
+                          <option>Uttar Pradesh</option>
+                          <option>Utrakhand</option>
+                          <option>West Bengal</option>
+                  </select>
+                </div>
+            
+                
+                <div class="form-group" required>
+                  <label for="exampleFormControlTextarea1">Address*</label>
+                  <textarea class="form-control" id="address" rows="1"></textarea>
+                </div>
+                <div id="error" style="color:#fff;background-color:#616161;padding:15;text-align:center"></div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-sm btn-primary" onclick="submit()" style="outline:none">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+        </div>
+      </div>
+
+    
+
+    
+<table class="table table-sm" id="mytable">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">State</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Designation</th>
+        <th scope="col">Date Of Joining</th>
+        <th scope="col"></th>
+      </tr>
+
+      <% for (i=0; i<res.rowCount ; i++){ %>
+        <tr>
+          <th scope="row"><%=res.rows[i].eid%></th>
+          <td><%=res.rows[i].name%></td>
+          <td><%=res.rows[i].gender%></td>
+          <td><%=res.rows[i].state%></td>
+          <td><%=res.rows[i].phone%></td>
+          <td><%=res.rows[i].designation%></td>
+          <td><%=res.rows[i].date%></td>
+          <td >
+              <div class="dropdown">
+            <img src="3dot.png" height="20"  class="dropdown-toggle"data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false"/>
+            <div class="dropdown-menu " aria-labelledby="dropdownMenuButton"  style="margin: 0;padding:0" >
+                <a class="dropdown-item mt" id="<%=res.rows[i].eid%>" data-toggle="modal" data-target="#salary" href="#" style="outline:none" onclick="setId($(this).attr('id'))"><i class="small material-icons"  style="padding-right:29">add</i>    Salary Detail</a>
+                <a class="dropdown-item" id="<%=res.rows[i].eid%>"  data-toggle="modal" data-target="#view" href="#" onclick="viewEmployee($(this).attr('id'))"><i class="small material-icons"  style="padding-right:29" >visibility</i>   View</a>
+                <a class="dropdown-item" id="<%=res.rows[i].eid%>" href="#"><i class="small material-icons"  style="padding-right:29">strikethrough_s</i>   Pay Slip</a>
+                <a class="dropdown-item" id="<%=res.rows[i].eid%>" href="#" onclick="deleteCustomer($(this).attr('id'))" ><i class="small material-icons" style="padding-right:29">delete</i>  Delete</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+       <%}%>
+    </thead>
+    <tbody>
+         
+    </tbody>
+</table>
+           <!-- Modal -->
+          <div class="modal fade" id="salary" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title" id="exampleModalLabel"> Salary information</h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form style="text-align:left" > 
+                        <div class="form-group" required>
+                            <label for="name">Company PF No*</label>
+                            <input type="text" class="form-control" id="pfno" placeholder="" >
+                          </div>
+                          <div class="form-group" required>
+                            <label for="phone">PF Account No*</label>
+                            <input type="text" class="form-control" id="pfaccno" placeholder="">
+                          </div>
+        
+                          <div class="form-group" >
+                            <label for="exampleFormControlInput1">Income Tax No*</label>
+                            <input type="text" class="form-control" id="inc" placeholder="">
+                          </div>
+        
+                          <div class="form-group">
+                            <label for="gst">Basic Salary*</label>
+                            <input type="text" class="form-control" id="sal" placeholder="">
+                          </div>
+                        
+                        <div class="form-group" required>
+                          <label for="exampleFormControlTextarea1">PF*</label>
+                          <input type="text" class="form-control" id="pf" placeholder="">
+                        </div>
+
+                        <div class="form-group" required>
+                          <label for="exampleFormControlTextarea1">HRA*</label>
+                          <input type="text" class="form-control" id="hra" placeholder="">
+                        </div>
+                        
+                        <div id="err" style="color:#fff;background-color:#616161;padding:15;text-align:center"></div>
+                      </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn-sm btn-primary" onclick="salary()" style="outline:none">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+                </div>
+             
+                <!-- Modal -->
+<div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Employee information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">Name  <i><span style="color:#616161" id="ename"> </span></i></div>
+                <div class="col-md-6 ">Father <i><span style="color:#616161" id="efname"> </span> </i></div>
+                <div class="col-md-6">Mobile <i><span style="color:#616161" id="ephone"> </span></i> </div>
+                <div class="col-md-6 ">Designation <i><span style="color:#616161" id="edesignation"> </span> </i></div>
+                <div class="col-md-6">DOJ <i><span style="color:#616161" id="edate"> </span> </i></div>
+                <div class="col-md-6 ">Gender <i><span style="color:#616161" id="egender"> </span> </i></div>
+                <div class="col-md-6">State  <i><span style="color:#616161" id="estate"> </span> </i></div>
+                <div class="col-md-12">Address <i><span style="color:#616161" id="eaddress"> </span> </i> </div>
+                <div class="col-md-12 ">Email <i><span style="color:#616161" id="eemail"> </span> </i> </div>
+                <div class="col-md-12 ">PF Number <i><span style="color:#616161" id="epfno"> </span> </i> </div>
+                <div class="col-md-12 ">PF Account Number <i><span style="color:#616161" id="epfaccno"></span> </i> </div>
+                <div class="col-md-12 ">Income Tax no <i><span style="color:#616161" id="einc"></span> </i> </div>
+                <div class="col-md-12 ">PF Amount <i><span style="color:#616161" id="epf"> </span> </i> </div>
+                <div class="col-md-12 ">Basic Salary <i><span style="color:#616161" id="esal"> </span> </i> </div>
+                <div class="col-md-12 ">House Rent Allowance<i> <span style="color:#616161" id="ehra"> </span></i></div>
+                <div class="col-md-12 ">Salary Last Paid <i><span style="color:#616161" id="elp"> </span></i></div>
+              </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+var id;
+
+function deleteCustomer(id)
+{
+ $.ajax({
+            type: "POST",
+            url: "/delEmployee",
+            dataType: "json",
+            data: {
+                o: id
+            },
+            success: function (data) {
+              window.location.href = '/employee';
+                    },
+            error: function () {
+              alert("error")
+            }
+        });               
+}
+
+
+function viewEmployee(sid)
+{
+  var data;
+  $("#ename").text("");
+             $("#efname").text("");
+             $("#ephone").text("");
+             $("#edesignation").text("");
+             $("#edate").text("");
+             $("#egender").text("");
+             $("#estate").text("");
+             $("#eaddress").text("");
+             $("#eemail").text("");
+             $("#epfno").text("");
+             $("#epfaccno").text("");
+             $("#epf").text("");
+             $("#esal").text("");
+             $("#ehra").text("");
+             $("#einc").text("");
+  $.ajax({
+            type: "POST",
+            url: "/viewEmployee",
+            dataType: "json",
+            data: {
+                o: sid
+            },
+            success: function (data) {
+              if(data)
+              {
+             $("#ename").text(data.name);
+             $("#efname").text(data.fname);
+             $("#ephone").text(data.phone);
+             $("#edesignation").text(data.designation);
+             $("#edate").text(data.date);
+             $("#egender").text(data.gender);
+             $("#estate").text(data.state);
+             $("#eaddress").text(data.address);
+             $("#eemail").text(data.email);
+             $("#epfno").text(data.pfno);
+             $("#epfaccno").text(data.pfaccno);
+             $("#epf").text(data.pf);
+             $("#esal").text(data.sal);
+             $("#ehra").text(data.hra);
+             $("#einc").text(data.inc);
+            }else{
+              $("#ename").text("");
+             $("#efname").text("");
+             $("#ephone").text("");
+             $("#edesignation").text("");
+             $("#edate").text("");
+             $("#egender").text("");
+             $("#estate").text("");
+             $("#eaddress").text("");
+             $("#eemail").text("");
+             $("#epfno").text("");
+             $("#epfaccno").text("");
+             $("#epf").text("");
+             $("#esal").text("");
+             $("#ehra").text("");
+             $("#einc").text("");
+            }},
+            error: function () {
+                  }
+        });      
+  }
+
+function setId(sid)
+{
+ id=sid;
+ var data;
+ 
+             $("#pfno").val("");
+             $("#pfaccno").val("");
+             $("#pf").val("");
+             $("#sal").val("");
+             $("#hra").val("");
+             $("#inc").val("");
+  $.ajax({
+            type: "POST",
+            url: "/viewSalary",
+            dataType: "json",
+            data: {
+                o: sid
+            },
+            success: function (data) {
+              if(data)
+              {
+             $("#pfno").val(data.pfno);
+             $("#pfaccno").val(data.pfaccno);
+             $("#pf").val(data.pf);
+             $("#sal").val(data.sal);
+             $("#hra").val(data.hra);
+             $("#inc").val(data.inc);
+            }else{
+              $("#pfno").val("");
+             $("#pfaccno").val("");
+             $("#pf").val("");
+             $("#sal").val("");
+             $("#hra").val("");
+             $("#inc").val("");
+            }},
+            error: function () {
+                  }
+        });      
+}
+
+function salary()
+{
+  console.log(id);
+  var obj =
+         {   id:id,
+             pfno: document.getElementById('pfno').value,
+             pfaccno: document.getElementById('pfaccno').value,
+             inc:document.getElementById('inc').value,
+             pf:document.getElementById('pf').value,
+             sal:document.getElementById('sal').value,
+             hra:document.getElementById('hra').value,          
+         };
+     if(obj.pfno=="")
+     {
+      $('#pfno').trigger('focus')
+      $('#err').html("PF Number cannot be empty").fadeIn(500).delay(5000).fadeOut(500)
+     }else if(obj.pfaccno=="")
+     {
+      $('#pfaccno').trigger('focus')
+      $('#err').html("PF Account Number cannot be empty").fadeIn(500).delay(5000).fadeOut(500) 
+     }else if(obj.inc=="")
+     {
+      $('#inc').trigger('focus')
+      $('#err').html("Income Tax Number cannot be empty").fadeIn(500).delay(5000).fadeOut(500) 
+     }else if(obj.sal=="")
+     {
+      $('#sal').trigger('focus')
+      $('#err').html("Salary Amount cannot be empty").fadeIn(500).delay(5000).fadeOut(500) 
+     }else if(obj.pf=="")
+     {
+      $('#pf').trigger('focus')
+      $('#err').html("PF Amount cannot be empty").fadeIn(500).delay(5000).fadeOut(500) 
+     }else if(obj.hra=="")
+     {
+      $('#hra').trigger('focus')
+      $('#err').html("House Rent Allowance cannot be empty").fadeIn(500).delay(5000).fadeOut(500) 
+     }else{
+       
+      var obj = JSON.stringify(obj);
+      console.log(obj)
+      $.ajax({
+            type: "POST",
+            url: "/addSalary",
+            dataType: "json",
+            data: {
+                o: obj
+            },
+            success: function (data) {
+              $('#pfno').val("")
+              $('#pfaccno').val("")
+              $('#inc').val("")
+              $('#pf').val("")
+         $('#sal').val("")
+         $('#hra').val("")
+         $('#err').html("Salary added Sucessfully").fadeIn(500).delay(5000).fadeOut(500)
+         window.location.href = '/employee';    
+        },
+            error: function () {
+              $('#pfno').val("")
+              $('#pfaccno').val("")
+              $('#inc').val("")
+              $('#pf').val("")
+         $('#sal').val("")
+         $('#hra').val("")
+         $('#error').html("Something Went Wrong ,Pease try Again").fadeIn(500).delay(5000).fadeOut(500)
+            }
+        });      
+ 
+  
+
+     }
+
+}
+
+
+
+$(document).ready(function(){
+  $("#search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#mytable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+
+  function submit()
+  {
+    var obj =
+         {
+             name: document.getElementById('name').value,
+             phone: document.getElementById('phone').value,
+             fname:document.getElementById('fname').value,
+             designation:document.getElementById('designation').value,
+             date:document.getElementById('date').value,
+             email:document.getElementById('email').value,
+             state:document.getElementById('state').value,
+             address: document.getElementById('address').value,          
+         };
+         if(document.getElementById('male').checked)
+         obj.gender="M"
+         else
+         obj.gender="F"
+         console.log(obj)
+         if(obj.name=="")
+         {
+          $('#name').trigger('focus')
+          $('#error').html("Name cannot be empty").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.fname=="")
+        {
+          $('#fname').trigger('focus')
+          $('#error').html("Father's Name cannot be empty").fadeIn(500).delay(5000).fadeOut(500)
+        }
+        else if(obj.phone==""||obj.phone.length!=10)
+        {
+          $('#phone').trigger('focus')
+          $('#error').html("Not a Valid phone number").fadeIn(500).delay(5000).fadeOut(500)
+        }
+        else if(obj.email=="")
+        {
+          $('#email').trigger('focus')
+          $('#error').html("Enter a Valid Email address").fadeIn(500).delay(5000).fadeOut(500)
+        }
+        else if(obj.designation=="")
+        {
+          $('#designation').trigger('focus')
+          $('#error').html("Designation cannot be empty").fadeIn(500).delay(5000).fadeOut(500) 
+        }
+        else if(obj.date=="")
+        {
+           $('#date').trigger('focus')
+          $('#error').html("Date of Birth cannot be empty").fadeIn(500).delay(5000).fadeOut(500) 
+        }
+        else if(obj.address=="")
+        {
+          $('#address').trigger('focus')
+          $('#error').html("Address cannot be empty").fadeIn(500).delay(5000).fadeOut(500)
+        }else{
+          var obj = JSON.stringify(obj);
+   $.ajax({
+            type: "POST",
+            url: "/addEmployee",
+            dataType: "json",
+            data: {
+                o: obj
+            },
+            success: function (data) {
+              $('#name').val("")
+              $('#date').val("")
+              $('#email').val("")
+              $('#designation').val("")
+         $('#phone').val("")
+         $('#fname').val("")
+         $('#address').val("")
+         $('#error').html("Employee added Sucessfully").fadeIn(500).delay(5000).fadeOut(500)
+         
+         window.location.href = '/employee';    
+        },
+            error: function () {
+              $('#name').val("")
+              $('#email').val("")
+              $('#date').val("")
+              $('#designation').val("")
+         $('#phone').val("")
+         $('#fname').val("")
+         $('#address').val("")
+         $('#error').html("Something Went Wrong ,Pease try Again").fadeIn(500).delay(5000).fadeOut(500)
+            }
+        });      
+        }
+
+}
+  </script>

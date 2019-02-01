@@ -1,0 +1,227 @@
+<div style="padding:25px">
+
+    <div class="row">
+        <div class="col">
+            <form class="form-inline">
+                <input id="search" class="form-control" type="search" placeholder="Search">
+              </form>
+              <br/>
+        </div >
+        
+        <div class="col" style="text-align:right">
+                   
+          <button type="button" class="btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" style="outline:none">
+                Add Item
+              </button>
+              <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="exampleModalLabel"> Stock information</h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline:none">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form style="text-align:left" > 
+                <div class="form-group" required>
+                    <label for="name">Date*</label>
+                    <input type="date" class="form-control" id="date" placeholder="name" >
+                  </div>
+                  <div class="form-group" required>
+                        <label for="category"> Category*</label>
+                        <select class="form-control" id="category" style="outline:none">
+                                <option>Electronic</option>
+                                <option>Cooler</option>
+                                <option>AC</option>
+                                <option>TV</option>
+                                <option>LED TV</option>
+                                <option>Mitali</option>
+                                <option>Daikin</option>
+                                <option>Washing Machine</option>
+                                <option>Refrigerator</option>
+                                <option>Bajaj</option>
+
+                        </select>
+                      </div>
+    
+                      
+                  <div class="form-group" required>
+                        <label for="company">Company*</label>
+                        <input type="text" class="form-control" id="company" placeholder="company" >
+                      </div>
+
+
+                      <div class="form-group" required>
+                            <label for="model">Model*</label>
+                            <input type="text" class="form-control" id="model" placeholder="model" >
+                          </div>
+
+                          <div class="form-group" required>
+                                <label for="uom">UOM </label>
+                                <input type="text" class="form-control" id="uom" placeholder="uom" >
+                              </div>
+
+                              <div class="form-group" required>
+                                    <label for="quantity">Quantity*</label>
+                                    <input type="number" class="form-control" id="quantity" placeholder="quantity" >
+                                  </div>
+           
+                                  <div class="form-group" required>
+                                    <label for="hsn">HSN/SAC</label>
+                                    <input type="phone" class="form-control" id="hsn" placeholder="HSN/SAC" >
+                                  </div>
+                                  <div class="form-group" required>
+                                    <label for="pprice">Purchase Price*</label>
+                                    <input type="phone" class="form-control" id="pprice" placeholder="Purchase Price" >
+                                  </div>
+                                  <div class="form-group" required>
+                                    <label for="bprice">Base Price*</label>
+                                    <input type="phone" class="form-control" id="bprice" placeholder="Base Price" >
+                                  </div>
+                                  <div class="form-group" required>
+                                    <label for="sprice">Selling Price*</label>
+                                    <input type="phone" class="form-control" id="sprice" placeholder="Selling Price" >
+                                  </div>
+              
+                                  <div class="form-group" required>
+                                    <label for="detail">Description</label>
+                                    <textarea class="form-control" id="detail" rows="1"></textarea>
+                                  </div>
+                                  <div id="error" style="color:#fff;background-color:#616161;padding:15;text-align:center"></div>
+              
+                                </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-sm btn-primary" onclick="submit()" style="outline:none">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+        </div>
+      </div>
+
+    
+
+    
+    <table class="table table-sm" id="mytable">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Category</th>
+        <th scope="col">Company</th>
+        <th scope="col">Model</th>
+        <th scope="col">HSN/SAC</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Base Price</th>
+        <th scope="col">Selling Price</th> 
+      </tr>
+
+      <% for (i=0; i<res.rowCount ; i++){ %>
+        <tr>
+          <th scope="row"><%=res.rows[i].sid%></th>
+          <td><%=res.rows[i].category%></td>
+          <td><%=res.rows[i].company%></td>
+          <td><%=res.rows[i].model%></td>
+          <td><%=res.rows[i].hsn%></td>
+          <td><%=res.rows[i].quantity%></td>
+          <td><%=res.rows[i].bprice%></td>
+          <td><%=res.rows[i].sprice%></td>
+          <td >
+              <div class="dropdown">
+            <img src="3dot.png" height="20"  class="dropdown-toggle"data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false"/>
+            <div class="dropdown-menu " aria-labelledby="dropdownMenuButton"  style="margin: 0;padding:0" >
+                <a class="dropdown-item" id="<%=res.rows[i].sid%>" href="#"><i class="small material-icons"  style="padding-right:29">visibility</i>   View</a>
+                <a class="dropdown-item" id="<%=res.rows[i].sid%>" href="#" ><i class="small material-icons" style="padding-right:29">edit</i>  Edit</a>
+                <a class="dropdown-item" id="<%=res.rows[i].sid%>" onclick="deleteCustomer($(this).attr('id'))" ><i class="small material-icons" style="padding-right:29">delete</i>  Delete</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+       <%}%>
+        
+    </thead>
+    <tbody>
+    
+    </tbody>
+  </table>
+  </div>
+  <script type="text/javascript">
+    
+    
+$(document).ready(function(){
+  $("#search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#mytable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+    function submit()
+    {
+
+      var obj =
+         {
+             date: document.getElementById('date').value,
+             category: document.getElementById('category').value,
+             company: document.getElementById('company').value,
+             model: document.getElementById('model').value,
+          
+             uom: document.getElementById('uom').value,
+             quantity: document.getElementById('quantity').value,
+             hsn: document.getElementById('hsn').value,
+             pprice: document.getElementById('pprice').value,
+             bprice: document.getElementById('bprice').value,          
+             sprice: document.getElementById('sprice').value,
+             detail: document.getElementById('detail').value,          
+         };
+         if(obj.date=="")
+         {
+          $('#date').trigger('focus')
+          $('#error').html("Date is Required").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.company=="")
+        {
+          $('#company').trigger('focus')
+          $('#error').html("Company name is Required").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.model=="")
+        {
+          $('#model').trigger('focus')
+          $('#error').html("Model name is Required").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.quantity=="")
+        {
+          $('#quantity').trigger('focus')
+          $('#error').html("Quantity not Entered").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.pprice=="")
+        {
+          $('#pprice').trigger('focus')
+          $('#error').html("Enter Purchase Price").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.bprice=="")
+        {
+          $('#bprice').trigger('focus')
+          $('#error').html("Enter Base Price").fadeIn(500).delay(5000).fadeOut(500)
+        }else if(obj.sprice=="")
+        {
+          $('#sprice').trigger('focus')
+          $('#error').html("Enter Selling Price").fadeIn(500).delay(5000).fadeOut(500)
+        }else{
+
+          var obj = JSON.stringify(obj);
+         $.ajax({
+            type: "POST",
+            url: "/addstock",
+            dataType: "json",
+            data: {
+                o: obj
+            },
+            success: function (data) {
+              window.location.href = '/stock';
+        },
+            error: function () {
+            alert("error");
+            }
+        });      
+        }
+    }
+ 
+  </script>
